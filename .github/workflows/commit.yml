@@ -18,7 +18,7 @@ jobs:
           
           (
           export GIT_COMMITTER_NAME="a person"
-          if [ -z "$(git config user.name)" ]; then
+          if [ -z "$GIT_COMMITTER_NAME" ] && [ -z "$(git config user.name)" ]; then
             echo "no user.name - setting an example"
             git config user.name "example name" 2>/dev/null
           fi
@@ -27,5 +27,7 @@ jobs:
             git config user.email "user@example.com" 2>/dev/null
           fi
           git commit -m message 2>&1 || true
+          echo '```'
           git show HEAD
+          echo '```'
           ) >> "$GITHUB_STEP_SUMMARY"
