@@ -17,7 +17,8 @@ jobs:
           git add world
           
           (
-          export GIT_COMMITTER_NAME="a person"
+          export GIT_AUTHOR_NAME="author name"
+          export GIT_COMMITTER_NAME="committer name"
           if [ -z "$GIT_COMMITTER_NAME" ] && [ -z "$(git config user.name)" ]; then
             echo "no user.name - setting an example"
             git config user.name "example name" 2>/dev/null
