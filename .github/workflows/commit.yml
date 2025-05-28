@@ -15,18 +15,31 @@ jobs:
         run: |
           echo hello > world
           git add world
-          
+
+
           (
           export GIT_AUTHOR_NAME="author name"
-          # export GIT_COMMITTER_NAME="committer name"
-          if [ -z "$GIT_AUTHOR_NAME" ] && [ -z "$(git config user.name)" ]; then
+          export GIT_COMMITTER_EMAIL="committer@example.com"
+          if [ -z "$(git config user.name)" ]; then
             echo "no user.name - setting an example"
-            export GIT_AUTHOR_NAME="an author name"
+            fallback_name="fallback name"
+            if [ -z "$GIT_AUTHOR_NAME" ]; then
+              export GIT_AUTHOR_NAME="$fallback_name"
+            fi
+            if [ -z "$GIT_COMMITTER_NAME" ]; then
+              export GIT_COMMITTER_NAME="$fallback_name"
+            fi
           fi
+
           if [ -z "$(git config user.email)" ]; then
             echo "no user.email - setting an example"
-            export GIT_AUTHOR_EMAIL="author@example.com"
-            # export GIT_COMMITTER_EMAIL="committer@example.com"
+            fallback_email="fallback@example.com"
+            if [ -z "$GIT_AUTHOR_EMAIL" ]; then
+              export GIT_AUTHOR_EMAIL="$fallback_email"
+            fi
+            if [ -z "$GIT_COMMITTER_EMAIL" ]; then
+              export GIT_COMMITTER_EMAIL="$fallback_email"
+            fi
           fi
           git commit -m message 2>&1 || true
           echo '```'
