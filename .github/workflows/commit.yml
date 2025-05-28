@@ -30,6 +30,6 @@ jobs:
           fi
           git commit -m message 2>&1 || true
           echo '```'
-          git show HEAD
+          git show HEAD --format=full
           echo '```'
           ) >> "$GITHUB_STEP_SUMMARY"
