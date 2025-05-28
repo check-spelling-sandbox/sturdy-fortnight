@@ -15,8 +15,12 @@ jobs:
         run: |
           echo hello > world
           git add world
-          git config user.name "example name"
+          
           (
+          if [ -z "$(git config user.name)" ]; then
+            echo "no user.name - setting an example"
+            git config user.name "example name" 2>/dev/null
+          fi
           git commit -m message 2>&1 || true
           git show HEAD
           ) >> "$GITHUB_STEP_SUMMARY"
