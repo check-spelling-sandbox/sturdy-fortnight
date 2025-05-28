@@ -19,7 +19,7 @@ jobs:
           git config --global user.name "Global User"
 
           (
-          export GIT_COMMITTER_NAME="author name"
+          # export GIT_COMMITTER_NAME="author name"
           export GIT_AUTHOR_EMAIL="committer@example.com"
           if [ -z "$(git config user.name)" ]; then
             echo "no user.name - setting an example"
