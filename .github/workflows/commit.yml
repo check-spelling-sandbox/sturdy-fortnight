@@ -19,13 +19,13 @@ jobs:
           (
           export GIT_AUTHOR_NAME="author name"
           export GIT_COMMITTER_NAME="committer name"
-          if [ -z "$GIT_COMMITTER_NAME" ] && [ -z "$(git config user.name)" ]; then
+          if [ -z "$GIT_AUTHOR_NAME" ] && [ -z "$(git config user.name)" ]; then
             echo "no user.name - setting an example"
-            git config user.name "example name" 2>/dev/null
+            export GIT_AUTHOR_NAME="an author name"
           fi
           if [ -z "$(git config user.email)" ]; then
             echo "no user.email - setting an example"
-            git config user.email "user@example.com" 2>/dev/null
+            export GIT_AUTHOR_EMAIL="author@example.com"
           fi
           git commit -m message 2>&1 || true
           echo '```'
