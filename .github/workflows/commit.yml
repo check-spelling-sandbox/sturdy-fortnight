@@ -15,4 +15,8 @@ jobs:
         run: |
           echo hello > world
           git add world
-          (git commit -m message 2>&1) >> "$GITHUB_STEP_SUMMARY"
+          git config user.name "example name"
+          (
+          git commit -m message 2>&1 || true
+          git show HEAD
+          ) >> "$GITHUB_STEP_SUMMARY"
